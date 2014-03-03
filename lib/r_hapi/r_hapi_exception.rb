@@ -21,7 +21,7 @@ module RHapi
     def self.raise_error(response)
       exception = RHapi::ConnectionError.new(response)
       raise(exception, exception.message)
-    end 
+    end
     
   end
   

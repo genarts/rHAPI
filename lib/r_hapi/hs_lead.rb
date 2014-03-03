@@ -70,8 +70,6 @@ module RHapi
       end
     end
     
-    
-    
     # Work with data in the data hash
     def method_missing(method, *args, &block)
       
@@ -85,7 +83,7 @@ module RHapi
       else
         return super unless self.attributes.include?(attribute)
         self.attributes[attribute]
-      end 
+      end
             
     end
     
