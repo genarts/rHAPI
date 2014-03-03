@@ -36,7 +36,7 @@ module RHapi
 
       contacts = []
       data['contacts'].each do |data|
-        contact = Contact.new(data)
+        contact = HSContact.new(data)
         contacts << contact
       end
       data['contacts'] = contacts      
@@ -84,7 +84,7 @@ module RHapi
         options[:count] = @attributes['offset'] unless @attributes['offset'].nil? or !options[:count].nil? # Override count if not in called options
         options[:count] = @changed_attributes['offset'] unless @changed_attributes['offset'].nil? # Override count if updated
       end
-      results = Contact.find(search, options)
+      results = HSContact.find(search, options)
       super(results) 
     end
 
@@ -104,7 +104,7 @@ module RHapi
           options[:vidOffset] = @changed_attributes['vid-offset']
         end
       end
-      results = Contact.all(options)
+      results = HSContact.all(options)
       super(results) 
     end
 
@@ -152,7 +152,7 @@ module RHapi
           options[:vidOffset] = @changed_attributes['vid-offset']
         end
       end
-      results = Contact.recent(options)
+      results = HSContact.recent(options)
       super(results) 
     end
 
@@ -207,7 +207,7 @@ module RHapi
 
   end
 
-  class Contact
+  class HSContact
     include Connection
     extend Connection::ClassMethods
     
@@ -229,7 +229,7 @@ module RHapi
     # Class methods ----------------------------------------------------------
 
     def self.create(params)
-      contact = Contact.new
+      contact = HSContact.new
       contact.update_attributes(params)
       # returns new contact object # TODO: ensure returns contact object
     end
@@ -262,7 +262,7 @@ module RHapi
         :method => 'profile'
       ))
       contact_data = JSON.parse(response.body_str)
-      Contact.new(contact_data)
+      HSContact.new(contact_data)
     end
 
     # Finds specified contact by its email address.
@@ -275,7 +275,7 @@ module RHapi
         :method => 'profile'
       ))
       contact_data = JSON.parse(response.body_str)
-      Contact.new(contact_data)
+      HSContact.new(contact_data)
     end
 
     # Finds specified contact by its user token.
@@ -288,7 +288,7 @@ module RHapi
         :method => 'profile'
       ))
       contact_data = JSON.parse(response.body_str)
-      Contact.new(contact_data)
+      HSContact.new(contact_data)
     end
 
     # Finds all contacts
@@ -383,16 +383,16 @@ module RHapi
     end
 
     def create_new(params)
-      response = post(Contact.url_for(
+      response = post(HSContact.url_for(
         :api => 'contacts',
         :resource => 'contact'
       ), params)
       contact_data = JSON.parse(response.body_str)
-      Contact.new(contact_data)
+      HSContact.new(contact_data)
     end
 
     def update_existing(params)
-      response = post(Contact.url_for(
+      response = post(HSContact.url_for(
         :api => 'contacts',
         :resource => 'contact',
         :filter => 'vid',
@@ -403,7 +403,7 @@ module RHapi
     end
 
     def delete
-      response = http_delete(Contact.url_for(
+      response = http_delete(HSContact.url_for(
         :api => 'contacts',
         :resource => 'contact',
         :filter => 'vid',

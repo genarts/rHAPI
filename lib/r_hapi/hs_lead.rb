@@ -5,7 +5,7 @@ require File.expand_path('../connection', __FILE__)
 
 module RHapi
   
-  class Lead
+  class HSLead
     include Connection
     extend Connection::ClassMethods
     
@@ -32,7 +32,7 @@ module RHapi
       lead_data = JSON.parse(response.body_str)
       leads = []
       lead_data.each do |data|
-        lead = Lead.new(data)
+        lead = HSLead.new(data)
         leads << lead
       end
       leads
@@ -46,13 +46,13 @@ module RHapi
         :identifier => guid
       ))
       lead_data = JSON.parse(response.body_str)
-      Lead.new(lead_data)
+      HSLead.new(lead_data)
     end
     
     # Instance methods -------------------------------------------------------
     def update(params={})
       update_attributes(params) unless params.empty?
-      response = put(Lead.url_for(
+      response = put(HSLead.url_for(
         :api => 'leads',
         :resource => 'lead',
         :identifier => self.guid,

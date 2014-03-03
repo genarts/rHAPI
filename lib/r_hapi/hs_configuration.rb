@@ -1,5 +1,5 @@
 module RHapi
-  module Configuration
+  module HSConfiguration
     VALID_OPTIONS_KEYS = [:api_key, :access_token, :end_point, :hub_spot_site, :version]
     DEFAULT_API_KEY       = nil
     DEFAULT_ACCESS_TOKEN  = nil

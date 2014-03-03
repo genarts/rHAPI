@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Configuration" do
+describe "HSConfiguration" do
   before do
     RHapi.configure do |config|
       config.api_key = "123"
