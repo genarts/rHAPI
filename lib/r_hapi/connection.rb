@@ -97,14 +97,14 @@ module RHapi
         c.on_failure do |x|
           RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
         end
-        response = c.perform
+        c.perform
         
-        unless response.header_str =~ /2\d\d/
+        unless c.header_str =~ /2\d\d/
           binding.pry
-          RHapi::ConnectionError.raise_error(response.header_str)
+          RHapi::ConnectionError.raise_error(c.header_str)
         end
-        RHapi::ConnectionError.raise_error(response.body_str) if response.body_str =~ /Error/i
-        response
+        RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i
+        c
       end
       
     end # End class methods
