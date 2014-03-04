@@ -94,11 +94,11 @@ module RHapi
         
         c = Curl::Easy.new(url) do |curl|
           curl.resolve_mode = :ipv4
-          curl.verbose = true
+          #curl.verbose = true
         end
         
         c.on_failure do |x|
-          RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
+          RHapi::ConnectionError.raise_error("#{c.response_code}\n Error is: #{err.inspect}")
         end
         
         c.perform
