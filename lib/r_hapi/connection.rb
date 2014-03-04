@@ -92,18 +92,22 @@ module RHapi
         #end
         #binding.pry
         
-        c = Curl::Easy.new(url)
-        c.resolve_mode = :ipv4
+        c = Curl::Easy.new(url) do |curl|
+          c.resolve_mode = :ipv4
+          c.verbose = true
+        end
+        
         c.on_failure do |x|
           RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
         end
+        
         c.perform
         
         unless c.header_str =~ /2\d\d/
           binding.pry
           RHapi::ConnectionError.raise_error(c.header_str)
         end
-        RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i
+        #RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i
         c
       end
       
