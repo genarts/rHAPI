@@ -93,7 +93,7 @@ module RHapi
         #binding.pry
         
         c = Curl::Easy.new(url) do |curl|
-          curl.resolve_mode = :ipv4
+          #curl.resolve_mode = :ipv4
           curl.verbose = true
         end
         
@@ -107,7 +107,7 @@ module RHapi
           binding.pry
           RHapi::ConnectionError.raise_error(c.header_str)
         end
-        RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i #THIS IS TERRIBLE.
+        #RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i #THIS IS TERRIBLE.
         c
       end
       
