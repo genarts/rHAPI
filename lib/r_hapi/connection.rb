@@ -85,11 +85,20 @@ module RHapi
       end
       
       def get(url)
-        response = Curl::Easy.perform(url) do |curl|
-          #curl.on_failure do |response, err|
-          #  RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
-          #end
+        #response = Curl::Easy.perform(url) do |curl|
+        #  curl.on_failure do |response, err|
+        #    RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
+        #  end
+        #end
+        #binding.pry
+        
+        c = Curl::Easy.new(url)
+        c.resolve_mode = :ipv4
+        c.on_failure do |x|
+          RHapi::ConnectionError.raise_error("#{response.response_code}\n Error is: #{err.inspect}")
         end
+        response = c.perform
+        
         unless response.header_str =~ /2\d\d/
           binding.pry
           RHapi::ConnectionError.raise_error(response.header_str)
