@@ -107,7 +107,7 @@ module RHapi
           binding.pry
           RHapi::ConnectionError.raise_error(c.header_str)
         end
-        #RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i
+        RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i #THIS IS TERRIBLE.
         c
       end
       
