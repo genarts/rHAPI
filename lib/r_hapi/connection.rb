@@ -93,8 +93,8 @@ module RHapi
         #binding.pry
         
         c = Curl::Easy.new(url) do |curl|
-          c.resolve_mode = :ipv4
-          c.verbose = true
+          curl.resolve_mode = :ipv4
+          curl.verbose = true
         end
         
         c.on_failure do |x|
