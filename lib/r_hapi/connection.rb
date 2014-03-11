@@ -103,7 +103,7 @@ module RHapi
 
         c.perform
 
-        RHapi::ConnectionError.raise_error(c.header_str) unless response.response_code.to_s =~ /2\d\d/
+        RHapi::ConnectionError.raise_error(c.header_str) unless c.response_code.to_s =~ /2\d\d/
 
         #RHapi::ConnectionError.raise_error(c.body_str) if c.body_str =~ /Error/i #THIS IS TERRIBLE.
         c
