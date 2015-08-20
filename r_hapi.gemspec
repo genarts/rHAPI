@@ -5,13 +5,13 @@
 # stub: r_hapi 0.1.3 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "r_hapi"
+  s.name = "r_hapi_genarts"
   s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tim Stephenson of RaddOnline"]
   s.date = "2014-02-04"
-  s.description = "Makes it easy to use the HubSpot API in a Ruby application."
+  s.description = "Makes it easy to use the HubSpot API in a Ruby application. Genarts Fork"
   s.email = "tim@raddonline.com"
   s.extra_rdoc_files = [
     "README.md"
