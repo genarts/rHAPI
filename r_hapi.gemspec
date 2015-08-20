@@ -5,7 +5,7 @@
 # stub: r_hapi 0.1.3 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "r_hapi_genarts"
+  s.name = "r_hapi"
   s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
